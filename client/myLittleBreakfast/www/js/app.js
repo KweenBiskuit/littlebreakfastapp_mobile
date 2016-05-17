@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('littlebreakfast', 
-  ['ionic', 'littlebreakfast.services', ])
+  ['ionic', 'littlebreakfast.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -24,7 +24,6 @@ angular.module('littlebreakfast',
   });
 })
 
-
 // ROUTING of the APP =======================
 .config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -32,13 +31,13 @@ angular.module('littlebreakfast',
   .state('auth', {
     url: "/auth",
     abstract: true,
-    templateUrl: "templates/auth.html"
+    templateUrl: "templates/auth/auth.html"
   })
   .state('auth.signin', {
     url: '/signin',
     views: {
       'auth-signin': {
-        templateUrl: 'templates/auth-signin.html',
+        templateUrl: 'templates/auth/auth-signin.html',
         controller: 'SignInCtrl'
       }
     }
@@ -47,7 +46,7 @@ angular.module('littlebreakfast',
     url: '/signup',
     views: {
       'auth-signup': {
-        templateUrl: 'templates/auth-signup.html',
+        templateUrl: 'templates/auth/auth-signup.html',
         controller: 'SignUpCtrl'
       }
     }
@@ -56,13 +55,13 @@ angular.module('littlebreakfast',
   .state('todolist', {
     url: "/todolist",
     abstract: true,
-    templateUrl: "templates/todolist.html"
+    templateUrl: "templates/todolists/todolist.html"
   })
   .state('todolist.list', {
     url: '/list',
     views: {
       'todolist-list': {
-        templateUrl: 'templates/todolist-list.html',
+        templateUrl: 'templates/todolists/todolist-list.html',
         controller: 'myListCtrl'
       }
     }
@@ -71,7 +70,7 @@ angular.module('littlebreakfast',
     url: '/completed',
     views: {
       'todolist-completed': {
-        templateUrl: 'templates/todolist-completed.html',
+        templateUrl: 'templates/todolists/todolist-completed.html',
         controller: 'completedCtrl'
       }
     }
@@ -81,7 +80,7 @@ angular.module('littlebreakfast',
     url: '/meals',
     views: {
       'meals': {
-        templateUrl: 'templates/meals.html',
+        templateUrl: 'templates/meals/meals.html',
         controller: 'mealCtrl'
       }
     }
