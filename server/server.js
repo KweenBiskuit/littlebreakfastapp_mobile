@@ -1,7 +1,7 @@
 var restify     =   require('restify');
 var mongojs     =   require('mongojs');
 var morgan    =   require('morgan');
-var db          =   mongojs('littlebreakfastapp', ['users','todoLists', 'meals']);
+var db          =   mongojs('littlebreakfastapp', ['users','todoLists', 'meals', 'categories']);
 var server      =   restify.createServer();
  
 server.use(restify.acceptParser(server.acceptable));
@@ -26,3 +26,4 @@ server.listen(process.env.PORT || 9804, function () {
 var manageUsers = require('./api/auth/manageUser')(server, db)
 var manageList = require('./api/list/manageList')(server, db)
 var manageMeal = require('./api/meal/manageMeal')(server, db)
+var manageMeal = require('./api/category/manageCategory')(server, db)

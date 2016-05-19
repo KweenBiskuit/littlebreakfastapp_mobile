@@ -1,21 +1,91 @@
-/* Empty. Add your own CSS if you like */
-.margin {
-    margin - left: 9px;
-    margin - right: 9px;
+/* FONT */
+.curvy-text{
+  font-family: 'Lato', sans-serif;
 }
-.icon-actions {
-    font-size: 23px;
+
+h1, h2, h3{
+  color: #797979;
+  font-weight: lighter;
+  text-align: center;
 }
-.checkbox {
-    vertical-align: middle;
+
+/* NAVBAR - HEADER ============== */
+.title.title-left.header-item{
+  text-align: center;
 }
-.actions {
-    float: right;
+/*navbar color*/
+.bar-color-mlb{
+  background-color: #F64B53;
+  color:#fff;
 }
-.item-text-wrap {
-    overflow: auto;
+.bar-color-mlb h1{
+  color:#fff;
 }
-.ion-checkmark-circled.icon-actions.margin
-{
-  margin-right: 35px;
+.bar-color-mlb button.button-icon.button-clear.ion-navicon{
+  color:#fff;
 }
+
+/* BUTTONS */ 
+a.button.button-calm.button-rose{
+  background-color: #7AC0A3;
+}
+
+/* BANNER image ============== */
+div.home-banner{
+  height: 45vh;
+  background:  url('http://crown.rdhs.org/wp-content/uploads/2016/04/breakfast-in-bed-5-475x317.jpg') center center;
+  background-size: cover;
+  position: relative;
+}
+div.delivery-banner{
+  background:  url('https://i.imgsafe.org/b45f009.png') top center;
+  background-size: cover;
+}
+
+/* HOME ================== */
+h1.curvy-text.slogan{
+  font-size: 1.3em;
+  position: absolute; 
+  top: 30px;
+  text-align: center;
+  width: 100%;
+  color:#fff;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* BOX-CATEGORY ================== */
+.box-category{
+  /*background-color: red;*/
+  margin: 5px;
+  width: 45%;
+  text-align: center;
+  display: inline-block;
+  border-bottom: 1px solid lightgrey;
+  height: 160px;
+  vertical-align: top;
+  padding: 10px 0 20px;
+  color: lightgrey;
+}
+.box-category img{
+  width: 40%;
+}
+.box-category a{
+  text-decoration: none;
+  color:#939393;
+}
+.box-category h5{
+  color:inherit;
+}
+
+/*MEALS ============== */
+.meal-image{
+  width: 30%;s
+  /*float: left;*/
+  padding:0 5px 10px 0;
+}
+
+div.item.item-divider{
+  background-color: #DE7A7E;
+  color:#fff;
+}
+

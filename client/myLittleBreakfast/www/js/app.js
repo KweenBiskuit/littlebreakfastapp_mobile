@@ -3,91 +3,104 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('littlebreakfast', 
-  ['ionic', 'littlebreakfast.services'])
+// 'starter.controllers' is found in controllers.js
+angular.module('mlb', ['ionic', 'mlb.controllers', 'mlb.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
+
     }
-    if(window.StatusBar) {
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
 })
 
-// ROUTING of the APP =======================
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-  // AUTH routing -----------------------
-  .state('auth', {
-    url: "/auth",
+
+  .state('app', {
+    url: '/app',
     abstract: true,
-    templateUrl: "templates/auth/auth.html"
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl'
   })
-  .state('auth.signin', {
-    url: '/signin',
+  .state('app.search', {
+    url: '/search',
     views: {
-      'auth-signin': {
-        templateUrl: 'templates/auth/auth-signin.html',
-        controller: 'SignInCtrl'
+      'menuContent': {
+        templateUrl: 'templates/search.html'
       }
     }
   })
-  .state('auth.signup', {
-    url: '/signup',
+  .state('app.browse', {
+    url: '/browse',
     views: {
-      'auth-signup': {
-        templateUrl: 'templates/auth/auth-signup.html',
-        controller: 'SignUpCtrl'
+      'menuContent': {
+        templateUrl: 'templates/browse.html'
       }
     }
   })
-  // TODOLIST routing -----------------------
-  .state('todolist', {
-    url: "/todolist",
-    abstract: true,
-    templateUrl: "templates/todolists/todolist.html"
-  })
-  .state('todolist.list', {
-    url: '/list',
+  .state('app.delivery', {
+    url: '/delivery',
     views: {
-      'todolist-list': {
-        templateUrl: 'templates/todolists/todolist-list.html',
-        controller: 'myListCtrl'
+      'menuContent': {
+        templateUrl: 'templates/delivery.html'
       }
     }
   })
-  .state('todolist.completed', {
-    url: '/completed',
+  .state('app.home', {
+    url: '/home',
     views: {
-      'todolist-completed': {
-        templateUrl: 'templates/todolists/todolist-completed.html',
-        controller: 'completedCtrl'
+      'menuContent': {
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
       }
     }
   })
-  // MEALS routing -----------------------
-  .state('meals', {
+  .state('app.playlists', {
+    url: '/playlists',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/playlists.html',
+        controller: 'PlaylistsCtrl'
+      }
+    }
+  })
+  .state('app.meals', {
     url: '/meals',
     views: {
-      'meals': {
+      'menuContent': {
         templateUrl: 'templates/meals/meals.html',
-        controller: 'mealCtrl'
+        controller: 'MealsCtrl'
+      }
+    }
+  })
+  .state('app.meal', {
+    url: '/meals/:id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/meals/meal-detail.html',
+        controller: 'MealDetailCtrl'
       }
     }
   })
 
-
-
-
-  $urlRouterProvider.otherwise('/auth/signin');
+  .state('app.single', {
+    url: '/playlists/:playlistId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/playlist.html',
+        controller: 'PlaylistCtrl'
+      }
+    }
+  });
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/home');
 });

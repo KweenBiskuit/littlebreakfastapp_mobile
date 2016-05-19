@@ -1,6 +1,48 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <img src="http://static1.squarespace.com/static/515ecaf0e4b0875140cb8775/543d68f9e4b07576a1749d1f/543d68fae4b03d51ea614e7b/1413310715164/breakfast-in-bed-5.jpg?format=500w" alt="breakfast in bed">
-    <h1>Meals</h1>
+<ion-view view-title="Our Meals">
+  <ion-content style="background-color:#F3EFE8">
+
+    <div class="home-banner">
+      <h1 class="curvy-text slogan">When your bed is just to comfy to leave</h1>
+    </div>
+
+    <div class="item item-divider">
+        Cakes and Pudding
+    </div>
+    <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
+
+      <div class="item item-body">
+        <img class="full-image" src="http://www.thepositiveparents.com/wp-content/uploads/2015/04/Scones-Clotted-Cream.jpg">
+        <h2>{{meal.title}}</h2>
+        <p>{{meal.price}} €</p>
+        <div class="button-bar">
+          <a class="button button-calm button-rose">Add to basket</a>
+          <a class="button button-calm button-rose" href="#/app/meals/{{meal._id}}">Details</a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="item item-divider">
+        Candy Bars
+    </div>
+    <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
+
+      <div class="item item-body">
+        <img class="full-image" src="http://goodlifemississauga.com/133-gl-2015/reads_Sep_2015_01b.jpg">
+        <h2>{{meal.title}}</h2>
+        <div class="button-bar">
+          <a class="button button-calm button-rose">Add to basket</a>
+          <a class="button button-calm button-rose" href="#/app/meals/{{meal._id}}">Details</a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
   </ion-content>
 </ion-view>

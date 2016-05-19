@@ -40,6 +40,8 @@ module.exports = function (server, db) {
 
     server.post('/api/auth/login', function (req, res, next) {
         var user = req.params;
+        console.log('**** user ****');
+        console.log(user);
         if (user.email.trim().length == 0 || user.password.trim().length == 0) {
             res.writeHead(403, {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -57,6 +59,7 @@ module.exports = function (server, db) {
             pwdMgr.comparePassword(user.password, dbUser.password, function (err, isPasswordMatch) {
 
                 if (isPasswordMatch) {
+                    console.log("user find !!! :D")
                     res.writeHead(200, {
                         'Content-Type': 'application/json; charset=utf-8'
                     });
