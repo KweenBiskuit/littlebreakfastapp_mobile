@@ -1,0 +1,21 @@
+<ion-view view-title="Your cart">
+  <ion-content class="padding">
+    <h1 class="home-title">Shopping Cart</h1>
+
+    <div id="box-empty-cart" ng-if="shoppingCartUser.length <= 0">
+      <h4>Your shopping cart is empty ! </h4>
+      <a class="link-discover" href="#/app/meals">Discover our meals</a>
+    </div>
+
+    <div id="box-empty-cart" class="list" ng-if="shoppingCartUser.length != 0" >
+      <a ng-repeat="item in shoppingCartUser" class="item item-thumbnail-left" href="#">
+        <img src="http://www.thepositiveparents.com/wp-content/uploads/2015/04/Scones-Clotted-Cream.jpg">
+        <h2>{{item}}</h2>
+        <p>Nine Inch Nails</p>
+      </a>
+
+
+    </div>
+
+  </ion-content>
+</ion-view>

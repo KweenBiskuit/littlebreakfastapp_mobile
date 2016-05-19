@@ -55,12 +55,29 @@ angular.module('mlb', ['ionic', 'mlb.controllers', 'mlb.services'])
       }
     }
   })
+  .state('app.philosophy', {
+    url: '/philosophy',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/philosophy.html'
+      }
+    }
+  })
   .state('app.home', {
     url: '/home',
     views: {
       'menuContent': {
         templateUrl: 'templates/home.html',
         controller: 'HomeCtrl'
+      }
+    }
+  })
+  .state('app.cart', {
+    url: '/cart',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/shopping-cart/shopping-cart.html',
+        controller: 'ShoppingCartCtrl'
       }
     }
   })
@@ -91,7 +108,15 @@ angular.module('mlb', ['ionic', 'mlb.controllers', 'mlb.services'])
       }
     }
   })
-
+  .state('app.beverages', {
+    url: '/beverages',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/beverages/beverages.html',
+        controller: 'BeveragesCtrl'
+      }
+    }
+  })
   .state('app.single', {
     url: '/playlists/:playlistId',
     views: {

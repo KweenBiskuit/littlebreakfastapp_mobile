@@ -11,12 +11,12 @@
         </button>
       </ion-nav-buttons>
 
-      <!-- <ion-nav-buttons side="right">
-        <a class="button icon-right ion-home button-calm" href="#/app/home"></a>
-      </ion-nav-buttons> -->
+      <ion-nav-buttons side="right">
+        <a class="button icon-right ion-android-cart button-basket" href="#/app/cart"></a>
+      </ion-nav-buttons>
     </ion-nav-bar>
 
-  <ion-nav-view name="menuContent">TEST</ion-nav-view>
+  <ion-nav-view name="menuContent"></ion-nav-view>
 
 </ion-side-menu-content>
 
@@ -33,19 +33,19 @@
       <ion-item class="item item-icon-left" menu-close href="#/app/meals">
         <i class="icon ion-fork"></i> Meals
       </ion-item>
-      <ion-item class="item item-icon-left" menu-close href="#/app/meals">
+      <ion-item class="item item-icon-left" menu-close href="#/app/beverages">
         <i class="icon ion-coffee"></i> Beverages
       </ion-item>
-<!--       <ion-item class="item item-icon-left" menu-close href="#/app/meals">
-        <i class="icon ion-star"></i>Categories
-      </ion-item> -->
       <ion-item class="item item-icon-left" menu-close href="#/app/search">
         <i class="icon ion-search"></i> Search
       </ion-item>
       <ion-item class="item item-icon-left" menu-close href="#/app/delivery">
         <i class="icon ion-android-bicycle"></i> Delivery
       </ion-item>
-      <ion-item class="item item-icon-left" menu-close href="#/app/meals">
+      <ion-item class="item item-icon-left" menu-close href="#/app/cart">
+        <i class="icon ion-android-cart"></i> Shopping Cart
+      </ion-item>
+      <ion-item class="item item-icon-left" menu-close href="#/app/philosophy">
         <i class="icon ion-heart"></i> Our philosophy
       </ion-item>
       <ion-item class="item item-icon-left" menu-close ng-click="login()">

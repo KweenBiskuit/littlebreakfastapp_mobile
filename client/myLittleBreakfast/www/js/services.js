@@ -115,10 +115,27 @@ deleteCategory: function (id) {
     });
 }
 
-
-
-
-
-
+// API Shopping Cart -------------------
+getAllCarts: function () {
+    console.log("API Get all shopping carts called");
+    return $http.get(base+'/api/carts', {
+        method: 'GET'
+    });
+},
+getOneCart: function (idUser) {
+    return $http.get(base+'/api/carts/' + idUser, {
+        method: 'GET'
+    });
+},
+saveOneItemInCart : function (form) {
+    return $http.post(base+'/api/cart/' + idCart, form, {  
+        method: 'POST'
+    });
 }
+
+
+
+
+
+} 
 });

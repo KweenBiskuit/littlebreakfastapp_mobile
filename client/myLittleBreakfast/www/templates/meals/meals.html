@@ -1,9 +1,9 @@
 <ion-view view-title="Our Meals">
   <ion-content style="background-color:#F3EFE8">
 
-    <div class="home-banner">
+   <!--  <div class="home-banner">
       <h1 class="curvy-text slogan">When your bed is just to comfy to leave</h1>
-    </div>
+    </div> -->
 
     <div class="item item-divider">
         Cakes and Pudding
@@ -15,6 +15,23 @@
         <h2>{{meal.title}}</h2>
         <p>{{meal.price}} €</p>
         <div class="button-bar">
+          <a class="button button-outline button-calm" ng-click="addToCart(meal)">Add to basket</a>
+          <a class="button button-outline button-calm" href="#/app/meals/{{meal._id}}">Details</a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="item item-divider">
+        Everything in a bun
+    </div>
+    <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
+
+      <div class="item item-body">
+        <img class="full-image" src="http://goodlifemississauga.com/133-gl-2015/reads_Sep_2015_01b.jpg">
+        <h2>{{meal.title}}</h2>
+        <div class="button-bar">
           <a class="button button-calm button-rose">Add to basket</a>
           <a class="button button-calm button-rose" href="#/app/meals/{{meal._id}}">Details</a>
         </div>
@@ -24,12 +41,12 @@
 
 
     <div class="item item-divider">
-        Candy Bars
+        Refreshing Fruits
     </div>
     <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
 
       <div class="item item-body">
-        <img class="full-image" src="http://goodlifemississauga.com/133-gl-2015/reads_Sep_2015_01b.jpg">
+        <img class="full-image" src="http://previews.123rf.com/images/rixie/rixie1308/rixie130800009/21806892-Summer-fruit-platter-on-wood-table-with-vintage-effect-processing-Stock-Photo.jpg">
         <h2>{{meal.title}}</h2>
         <div class="button-bar">
           <a class="button button-calm button-rose">Add to basket</a>

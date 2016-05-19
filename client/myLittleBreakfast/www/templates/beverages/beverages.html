@@ -1,0 +1,48 @@
+<ion-view view-title="Our Beverages">
+  <ion-content style="background-color:#F3EFE8">
+
+   <!--  <div class="home-banner">
+      <h1 class="curvy-text slogan">When your bed is just to comfy to leave</h1>
+    </div> -->
+
+    <div class="item item-divider">
+        Hot Beverages
+    </div>
+    <div class="list card" ng-repeat="beverage in listBeverages" href="#/app/beverages/{{beverage._id}}">
+
+      <div class="item item-body">
+        <img class="full-image" src="http://data1.whicdn.com/images/77977065/large.jpg">
+        <h2>{{beverage.title}}</h2>
+        <p>{{beverage.price}} €</p>
+        <div class="button-bar">
+          <a class="button button-calm button-rose">Add to basket</a>
+          <a class="button button-calm button-rose" href="#/app/beverages/{{beverage._id}}">Details</a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="item item-divider">
+        Cold Beverages
+    </div>
+    <div class="list card" ng-repeat="beverage in listBeverages" href="#/app/beverages/{{beverage._id}}">
+
+      <div class="item item-body">
+        <img class="full-image" src="http://www.menshealth.com/sites/menshealth.com/files/styles/slideshow-desktop/public/images/slideshow2/smoothie-intro.jpg?itok=SnODR8vz">
+        <h2>{{beverage.title}}</h2>
+        <div class="button-bar">
+          <a class="button button-calm button-rose">Add to basket</a>
+          <a class="button button-calm button-rose" href="#/app/beverages/{{beverage._id}}">Details</a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+  </ion-content>
+</ion-view>

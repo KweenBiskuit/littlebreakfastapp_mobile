@@ -42,85 +42,113 @@ angular.module('mlb.controllers', ['mlb.services'])
   };
 })
 
-// MEAL CONTROLLER =============================================
-.controller('MealsCtrl', function($scope, API) {
-  API.getAllMeals().success(function (data, status, headers, config) {
-    $scope.listMeals = [];
-
-    console.log(data);
-    for (var i = 0; i < data.length; i++) {
-      $scope.listMeals.push(data[i]);
-    };
-
-    if(data.length > 0 & $scope.listMeals.length == 0)
-    {
-      $scope.incomplete = true;
-    }
-    else
-    {
-      $scope.incomplete= false;
-    }
-
-    if(data.length == 0)
-    {
-      $scope.noData = true;
-    }
-    else
-    {
-      $scope.noData = false;
-    }
-  }).error(function (data, status, headers, config) {
-    $rootScope.notify("Oops something went wrong !! Please try again later");
-  });
-})
-/*end:controller*/
-
-.controller('MealDetailCtrl', function($scope, $stateParams, API) {
-/*  $scope.oneMeal = {
-    "title" : "Salmon with carrots",
-    "price" : "10",
-    "image" : "salmon-carrots.jpg"
-  };*/
-
-  $scope.oneMeal = {};
-
-  console.log("******* State params :id ******* ");
-  console.log($stateParams.id);
-
-  var idMeal = $stateParams.id;
-
-  API.getOneMeal(idMeal).success(function (data, status, headers, config) {
-    $scope.oneMeal = data[0];
-    console.log("**** $scope.oneMeal ****");
-    console.log($scope.oneMeal);
-
-  }).error(function (data, status, headers, config) {
-    $rootScope.notify("Oops something went wrong !! Please try again later");
-  });
-
-})
-
 // HOME CONTROLLER =============================================
-.controller('HomeCtrl', function($scope, $stateParams, API) {
-  API.getAllCategories().success(function (data, status, headers, config) {
-    $scope.listCategories = [];
+  .controller('HomeCtrl', function($scope, $stateParams, API) {
+    //get All Categories
+    API.getAllCategories().success(function (data, status, headers, config) {
+      $scope.listCategories = [];
 
-    for (var i = 0; i < data.length; i++) {
-      $scope.listCategories.push(data[i]);
-    };
-  }).error(function (data, status, headers, config) {
-    $rootScope.notify("Oops something went wrong !! Please try again later");
+      for (var i = 0; i < data.length; i++) {
+        $scope.listCategories.push(data[i]);
+      };
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
+
+    //get favorites Meals
+    API.getAllMeals().success(function (data, status, headers, config) {
+      $scope.listFavMeals = [];
+
+      console.log(data);
+      for (var i = 0; i < data.length/3; i++) {
+        $scope.listFavMeals.push(data[i]);
+      };
+      
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
+  })
+/*end:home controller*/
+
+// MEAL CONTROLLER =============================================
+  .controller('MealsCtrl', function($scope, API, $window) {
+
+    //Add to cart when click on button
+    var shoppingCart = [];
+
+    $scope.addToCart = function(meal){
+      console.log(meal); 
+
+      if(shoppingCart.indexOf( meal ) == -1){
+        shoppingCart.push(meal);
+      }else{
+        console.log("This meal is est déjà dans l'array");
+      }
+
+     /* $window.localStorage.shoppingCart = shoppingCart;
+      console.log("****** shoppingCart *******");
+      console.log(shoppingCart);*/
+
+      
+    } /*end:addToCart() */
+
+
+    API.getAllMeals().success(function (data, status, headers, config) {
+      $scope.listMeals = [];
+
+      for (var i = 0; i < data.length/3; i++) {
+        $scope.listMeals.push(data[i]);
+      };
+      
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
+  })
+/*end:meal controller*/
+
+// MEAL DETAIL CONTROLLER ======================================
+  .controller('MealDetailCtrl', function($scope, $stateParams, API) {
+    $scope.oneMeal = {};
+    console.log("******* State params :id ******* ");
+    console.log($stateParams.id);
+
+    var idMeal = $stateParams.id;
+
+    API.getOneMeal(idMeal).success(function (data, status, headers, config) {
+      $scope.oneMeal = data[0];
+      console.log("**** $scope.oneMeal ****");
+      console.log($scope.oneMeal);
+
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
+  })
+/*end:meal-detail controller*/
+
+// BEVERAGES CONTROLLER ========================================
+  .controller('BeveragesCtrl', function($scope, API) {
+    API.getAllMeals().success(function (data, status, headers, config) {
+      $scope.listBeverages = [];
+      console.log(data);
+      for (var i = 0; i < data.length/3; i++) {
+        $scope.listBeverages.push(data[i]);
+      };   
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
+  })
+/*end:beverages-controller*/
+
+
+
+
+// SHOPPING CART CONTROLLER =====================================
+  .controller('ShoppingCartCtrl', function($scope, $stateParams, API, $window) {
+   
+    var shoppingCartUser = [];
+    shoppingCartUser = $window.localStorage.shoppingCart;
+
+    console.log(shoppingCartUser);
+
   });
-
-  API.getAllMeals().success(function (data, status, headers, config) {
-    $scope.listMeals = [];
-
-    console.log(data);
-    for (var i = 0; i < data.length; i++) {
-      $scope.listMeals.push(data[i]);
-    };
-    
-  }).error(function (data, status, headers, config) {
-    $rootScope.notify("Oops something went wrong !! Please try again later");
-  });
-});
+/*end:beverages-controller*/
