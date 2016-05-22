@@ -11,13 +11,24 @@ module.exports = function (server, db) {
     });
 
     //FIND one CART (one shopping cart of a specific user)
-    server.get('/api/carts/:idUser', function (req, res, next) {
-        db.shoppingcarts.find({_id: db.ObjectId(req.params.idUser)}, function (err, data) {
+    server.get('/api/carts/:userToken', function (req, res, next) {
+        db.shoppingcarts.findOne({user: req.params.userToken}, function (err, data) {
             res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
             res.end(JSON.stringify(data));
         });
         return next();
     });
+
+    //CREATE SHOPPING CART
+    server.post('/api/cart', function (req, res, next) {
+        var newItemInCart = req.params;
+        db.shoppingcarts.save(newItemInCart, function (err, data) {
+            res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+            res.end(JSON.stringify(data));
+        });
+        return next();
+    });
+
 
     //CREATE one ITEM in a specific cart (create the cart wit)
     server.post('/api/cart/:idCart', function (req, res, next) {
@@ -29,23 +40,34 @@ module.exports = function (server, db) {
         return next();
     });
 
-   /* //UPDATE one ITEM in CART
-    server.put('/api/cart/:id', function (req, res, next) {
-        //1. find the meal to update
-        db.shoppingcarts.findOne({_id: db.ObjectId(req.params.id)}, function (err, data) {
+    //UPDATE CART ADDING ONE ITEM
+    server.put('/api/cart/:userToken', function (req, res, next) {
+        //1. find the cart to update
+        db.shoppingcarts.findOne({user: req.params.userToken}, function (err, data) {
+
+            console.log(req.params);
 
             //2.  merge req.params/product with the server/product
-            var updMeal = {};
+            var updCart = {};
             for (var n in data) {
-                updMeal[n] = data[n];
-            }
-            for (var n in req.params) {
-                if (n != "id")
-                    updMeal[n] = req.params[n];
+                updCart[n] = data[n];
             }
 
-            //3. modify the meal with the values of updMeal
-            db.shoppingcarts.update({_id: db.ObjectId(req.params.id)}, updMeal, { multi: false}, function (err, data) {
+            //3. add to the array Items of the upCart, the new item fill with the params prop
+            updCart.items.push({
+                "_id" : req.params._id,
+                'desc' : req.params.desc,
+                'photo' : req.params.photo,
+                'price' : req.params.price,
+                'cat_id' : req.params.cat_id,
+                'title' : req.params.title
+            });
+
+            console.log("**** updCart ****");
+            console.log(updCart);
+
+            //4. Modifier en db le Cart et y mettre le new object updCart (items[]+1)
+            db.shoppingcarts.update({user: req.params.userToken}, updCart, { multi: false}, function (err, data) {
                 res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
                 res.end(JSON.stringify(data));
             });
@@ -53,13 +75,29 @@ module.exports = function (server, db) {
         return next();
     });
 
-    //DELETE one ITEM in the list of one User in all todoLists
+    //DELETE one ITEM in the cart
     server.del('/api/cart/:id', function (req, res, next) {
-        db.shoppingcarts.remove({_id: db.ObjectId(req.params.id)}, function (err, data) {
+        db.shoppingcarts.remove({user: db.ObjectId(req.params.id)}, function (err, data) {
             res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
             res.end(JSON.stringify(data));
         });
         return next();
-    });*/
+    });
+
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

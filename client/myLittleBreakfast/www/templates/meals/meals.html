@@ -1,65 +1,43 @@
 <ion-view view-title="Our Meals">
   <ion-content style="background-color:#F3EFE8">
 
-   <!--  <div class="home-banner">
-      <h1 class="curvy-text slogan">When your bed is just to comfy to leave</h1>
-    </div> -->
+    <!-- {{listCategories}} -->
 
-    <div class="item item-divider">
-        Cakes and Pudding
-    </div>
-    <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
-
-      <div class="item item-body">
-        <img class="full-image" src="http://www.thepositiveparents.com/wp-content/uploads/2015/04/Scones-Clotted-Cream.jpg">
-        <h2>{{meal.title}}</h2>
-        <p>{{meal.price}} €</p>
-        <div class="button-bar">
-          <a class="button button-outline button-calm" ng-click="addToCart(meal)">Add to basket</a>
-          <a class="button button-outline button-calm" href="#/app/meals/{{meal._id}}">Details</a>
+    <!-- LIST CATEGORIES REPEAT -->
+    <div class="box-wrapper-category" ng-repeat="categorie in listCategories">
+      <!-- BOX ONE CATEGORY -->
+      <div ng-if="categorie._id != 1">
+        <div class="item item-divider" style="background-color:">
+          <img src="{{categorie.image}}">
+          <p>{{categorie.name}}</p>
         </div>
-      </div>
 
-    </div>
+        <div  ng-repeat="meal in listMeals" >
+          <div ng-if="meal.cat_id == categorie._id"   class="list card card-box-meal">
+            <a href="#/app/meals/{{meal._id}}">
+              <div class="item item-body box-meal">
+                <div class="box-meal-img">
+                  <img class="full-image meal-image" src="{{meal.photo}}">
+                </div>
+                <div class="box-meal-desc">
+                  <h2>{{meal.title}}</h2>
+                  <p>cat n° : {{meal.cat_id}}</p>
+                  <p class="price">{{meal.price}} €</p>     
+                  <div class="button-bar">
+                    <a class="button button-outline button-calm" href="#/app/meals/{{meal._id}}"><i class="icon ion-information"></i></a>
+                    <a class="button button-outline button-calm" ng-click="addToCart(meal)"><i class="icon ion-android-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div></div>
 
-
-    <div class="item item-divider">
-        Everything in a bun
-    </div>
-    <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
-
-      <div class="item item-body">
-        <img class="full-image" src="http://goodlifemississauga.com/133-gl-2015/reads_Sep_2015_01b.jpg">
-        <h2>{{meal.title}}</h2>
-        <div class="button-bar">
-          <a class="button button-calm button-rose">Add to basket</a>
-          <a class="button button-calm button-rose" href="#/app/meals/{{meal._id}}">Details</a>
         </div>
+          <!-- end:BOX ONE CATEGORY -->
       </div>
-
-    </div>
-
-
-    <div class="item item-divider">
-        Refreshing Fruits
-    </div>
-    <div class="list card" ng-repeat="meal in listMeals" href="#/app/meals/{{meal._id}}">
-
-      <div class="item item-body">
-        <img class="full-image" src="http://previews.123rf.com/images/rixie/rixie1308/rixie130800009/21806892-Summer-fruit-platter-on-wood-table-with-vintage-effect-processing-Stock-Photo.jpg">
-        <h2>{{meal.title}}</h2>
-        <div class="button-bar">
-          <a class="button button-calm button-rose">Add to basket</a>
-          <a class="button button-calm button-rose" href="#/app/meals/{{meal._id}}">Details</a>
-        </div>
-      </div>
-
-    </div>
+      <!-- end:BOX LIST CATEGORIES -->
 
 
+    </ion-content>
+  </ion-view>
 
-
-
-
-  </ion-content>
-</ion-view>

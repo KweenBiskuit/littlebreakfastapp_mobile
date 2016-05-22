@@ -15,7 +15,7 @@ h1, h2, h3, h4{
 }
 /*navbar color*/
 .bar-color-mlb{
-  background-color: #F64B53;
+  background-color: #D77383;
   color:#fff;
 }
 .bar-color-mlb h1{
@@ -102,17 +102,50 @@ iframe.map{
   color:inherit;
 }
 
-/*MEALS ============== */
+/*MEALS =================== */
+div.box-wrapper-category .item-divider{
+  text-align: center;
+}
+div.box-wrapper-category .item-divider p{
+  text-align: center;
+  /*font-weight: lighter;*/
+}
+div.box-wrapper-category .item-divider img{
+  width:50px;
+  margin:0 10px;
+}
+div.card-box-meal a{
+  text-decoration: none;
+}
+div.box-meal-img, div.box-meal-desc{
+  display: inline-block;
+  vertical-align: top;
+}
+div.box-meal-img{
+  /*outline:1px solid green;*/
+  width:59%;
+}
+div.box-meal-desc{
+  /*outline:1px solid pink;*/
+  width: 39%;
+  padding-left:10px;
+}
+div.box-meal-desc h2{
+  margin:0;
+  text-align: left;
+}
 .meal-image{
-  width: 30%;s
-  /*float: left;*/
-  padding:0 5px 10px 0;
+  width: 100%;
+}
+p.price{
+  font-weight: bolder;
+  padding-right: 0px;
+  text-align: right;
 }
 div.item.item-divider{
-  background-color: #DE7A7E;
-  color:#fff;
+  background-color: #E3D8DA;
+  /*color:#fff;*/
 }
-
 
 
 /*SHOPPING CART ============== */1
@@ -126,4 +159,11 @@ div.item.item-divider{
   text-align: center;
   font-size: 1.5em;
   margin-top: 20%;
+}
+
+span.button-cart{
+  display: inline-block;
+  background-color: red;
+  width: 20px;
+  height: 20px;
 }

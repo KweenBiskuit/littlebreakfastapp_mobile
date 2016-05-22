@@ -7,13 +7,13 @@
 
     <h2 class='home-title'>Our Categories</h2> 
 
-  <div style="margin:10px;">
+    <div style="margin:10px;">
 
-  <!-- Categories -->
+      <!-- Categories -->
       <div class=" box-category" ng-repeat="cat in listCategories" style="border-bottom:2px solid {{cat.color}}">
         <!-- <a href="#/app/category/{{cat._id}}" style="color: {{cat.color}}"> -->
         <a href="#/app/category/{{cat._id}}">
-          <img src="../img/food-icons/{{cat.image}}">
+          <img src="{{cat.image}}">
           <h5 >{{cat.name}}</h5>
           <p>{{cat.desc}}</p>
         </a>
@@ -21,38 +21,41 @@
       <!-- end:categories -->
 
       <!-- All times favorites -->
-          <h2 class='home-title'>All times fav   </h2>
-          <p style="text-align:center">Discover the favorites meals of our customers <i class="icon ion-heart"></i>  </p>
-          <div class="list card" ng-repeat="meal in listFavMeals" href="#/app/meals/{{meal._id}}">
+      <h2 class='home-title'>All times fav   </h2>
+      <p style="text-align:center">Discover the favorites meals of our customers <i class="icon ion-heart"></i>  </p>
 
-            <div class="item item-body">
-              <img class="full-image" src="http://www.thepositiveparents.com/wp-content/uploads/2015/04/Scones-Clotted-Cream.jpg">
-              <h2>{{meal.title}}</h2>
-              <p>{{meal.price}} €</p>
-              <div class="button-bar">
-                <a class="button button-calm button-rose">Add to basket</a>
-                <a class="button button-calm button-rose" href="#/app/meals/{{meal._id}}">Details</a>
-              </div>
-            </div>
-
+      <div class="list card" ng-repeat="meal in listFavMeals" href="#/app/meals/{{meal._id}}">
+        <div class="item item-body box-meal">
+          <div class="box-meal-img">
+            <img class="full-image meal-image" src="http://www.thepositiveparents.com/wp-content/uploads/2015/04/Scones-Clotted-Cream.jpg">
           </div>
-          <!-- end:favorites meals -->
+          <div class="box-meal-desc">
+            <h2>{{meal.title}}</h2>
+            <p class="price">{{meal.price}} €</p>     
+            <div class="button-bar">
+              <a class="button button-outline button-calm" href="#/app/meals/{{meal._id}}"><i class="icon ion-information"></i></a>
+              <a class="button button-outline button-calm" ng-click="addToCart(meal)"><i class="icon ion-android-cart"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end:favorites meals -->
 
-  </div>
+    </div>
 
-  
-  <h2 class='home-title'>Our Philosophy</h2>
-  <div class="banner-divider"></div>
 
-  <div style="margin:10px;">
-  <!-- Philosophy -->
+    <h2 class='home-title'>Our Philosophy</h2>
+    <div class="banner-divider"></div>
+
+    <div class="padding">
+      <!-- Philosophy -->
       <p>Jelly beans soufflé tootsie roll dessert. Bear claw caramels halvah gummies oat cake. Halvah lemon drops dragée wafer gummies pie carrot cake wafer cookie. Biscuit lollipop chocolate bar tiramisu. Carrot cake danish cake halvah carrot cake.
       </p>
       <p>Macaroon macaroon carrot cake apple pie. Dragée cupcake lemon drops biscuit. Candy canes chocolate cake cupcake biscuit tart. Biscuit cookie pudding halvah apple pie sesame snaps biscuit tart dessert.
       </p>
       <!-- end:philosophy -->
 
-  <!-- Delivery -->
+      <!-- Delivery -->
       <h2 class='home-title'>Delivery</h2>
       <div class="list">
         <label class="item item-input">
@@ -62,8 +65,6 @@
 
       <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2520.181244750313!2d4.35330635106076!3d50.827806679428726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c4ed9bfde4e9%3A0x727cddf2f4b81d01!2sADNEOM+Brussels!5e0!3m2!1sen!2sbe!4v1463579735809" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
       <!-- end:delivery -->
-
-
     </div>
 
 

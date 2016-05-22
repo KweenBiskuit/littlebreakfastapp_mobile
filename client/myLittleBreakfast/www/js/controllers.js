@@ -43,7 +43,7 @@ angular.module('mlb.controllers', ['mlb.services'])
 })
 
 // HOME CONTROLLER =============================================
-  .controller('HomeCtrl', function($scope, $stateParams, API) {
+.controller('HomeCtrl', function($scope, $stateParams, API) {
     //get All Categories
     API.getAllCategories().success(function (data, status, headers, config) {
       $scope.listCategories = [];
@@ -71,7 +71,7 @@ angular.module('mlb.controllers', ['mlb.services'])
 /*end:home controller*/
 
 // MEAL CONTROLLER =============================================
-  .controller('MealsCtrl', function($scope, API, $window) {
+.controller('MealsCtrl', function($scope, API, $window) {
 
     //Add to cart when click on button
     var shoppingCart = [];
@@ -81,22 +81,57 @@ angular.module('mlb.controllers', ['mlb.services'])
 
       if(shoppingCart.indexOf( meal ) == -1){
         shoppingCart.push(meal);
+
+        //on regarde si c'est la premiere fois que l'utilisateur enregistre des items dans son panier
+        if (shoppingCart.length <= 1) {
+
+          //new Cart 
+          var newCart = {
+            "user" :  $window.localStorage.token,
+            "items" : [
+              meal
+            ]
+          };
+          API.saveCart(newCart).success(function (data, status, headers, config) {
+            console.log("success !!!!");
+
+          }).error(function (data, status, headers, config) {
+            console.log("Oops something went wrong !! Please try again later");
+          });
+        }else{  //le shopping cart contient deja one item
+          var userToken = $window.localStorage.token;
+
+          API.saveOneItemInCart(userToken, meal).success(function (data, status, headers, config) {
+            console.log("success !!!!");
+          }).error(function (data, status, headers, config) {
+            console.log("Oops something went wrong !! Please try again later");
+          });
+
+          // - trouver le shopping cart dans la db
+          // - lui ajouter le nouvel item dans sa proprieté items[]
+
+        }
+
       }else{
         console.log("This meal is est déjà dans l'array");
       }
-
-     /* $window.localStorage.shoppingCart = shoppingCart;
-      console.log("****** shoppingCart *******");
-      console.log(shoppingCart);*/
-
-      
     } /*end:addToCart() */
 
+    //get All Categories
+    API.getAllCategories().success(function (data, status, headers, config) {
+      $scope.listCategories = [];
+
+      for (var i = 0; i < data.length; i++) {
+        $scope.listCategories.push(data[i]);
+      };
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
 
     API.getAllMeals().success(function (data, status, headers, config) {
       $scope.listMeals = [];
 
-      for (var i = 0; i < data.length/3; i++) {
+      for (var i = 0; i < data.length; i++) {
         $scope.listMeals.push(data[i]);
       };
       
@@ -107,48 +142,90 @@ angular.module('mlb.controllers', ['mlb.services'])
 /*end:meal controller*/
 
 // MEAL DETAIL CONTROLLER ======================================
-  .controller('MealDetailCtrl', function($scope, $stateParams, API) {
-    $scope.oneMeal = {};
-    console.log("******* State params :id ******* ");
-    console.log($stateParams.id);
+.controller('MealDetailCtrl', function($scope, $stateParams, API) {
+  $scope.oneMeal = {};
+  console.log("******* State params :id ******* ");
+  console.log($stateParams.id);
 
-    var idMeal = $stateParams.id;
+  var idMeal = $stateParams.id;
 
-    API.getOneMeal(idMeal).success(function (data, status, headers, config) {
-      $scope.oneMeal = data[0];
-      console.log("**** $scope.oneMeal ****");
-      console.log($scope.oneMeal);
+  API.getOneMeal(idMeal).success(function (data, status, headers, config) {
+    $scope.oneMeal = data[0];
+    console.log("**** $scope.oneMeal ****");
+    console.log($scope.oneMeal);
 
-    }).error(function (data, status, headers, config) {
-      $rootScope.notify("Oops something went wrong !! Please try again later");
-    });
-  })
+  }).error(function (data, status, headers, config) {
+    $rootScope.notify("Oops something went wrong !! Please try again later");
+  });
+})
 /*end:meal-detail controller*/
 
-// BEVERAGES CONTROLLER ========================================
-  .controller('BeveragesCtrl', function($scope, API) {
-    API.getAllMeals().success(function (data, status, headers, config) {
-      $scope.listBeverages = [];
-      console.log(data);
-      for (var i = 0; i < data.length/3; i++) {
-        $scope.listBeverages.push(data[i]);
-      };   
-    }).error(function (data, status, headers, config) {
-      $rootScope.notify("Oops something went wrong !! Please try again later");
-    });
-  })
+
+// BEVERAGES CONTROLLER ================================
+.controller('BeveragesCtrl', function($scope, API) {
+  API.getAllMeals().success(function (data, status, headers, config) {
+    $scope.listBeverages = [];
+
+    var allProducts  = data;
+    
+    for (var i = 0; i < allProducts.length; i++) {
+      var catId = allProducts[i].cat_id;
+
+      if (catId === "1") { //on verifie si le produit fait bien partie de la categorie  - Boissons
+        $scope.listBeverages.push(allProducts[i]);
+      }
+    };   
+
+  }).error(function (data, status, headers, config) {
+    $rootScope.notify("Oops something went wrong !! Please try again later");
+  });
+})
 /*end:beverages-controller*/
 
 
 
 
 // SHOPPING CART CONTROLLER =====================================
-  .controller('ShoppingCartCtrl', function($scope, $stateParams, API, $window) {
-   
-    var shoppingCartUser = [];
-    shoppingCartUser = $window.localStorage.shoppingCart;
+.controller('ShoppingCartCtrl', function($scope, $stateParams, API, $window, $rootScope) {
 
-    console.log(shoppingCartUser);
+  var userToken = $window.localStorage.token;
+  console.log("--- userToken :" + userToken);
 
+  //get the card of current User
+  API.getOneCart(userToken).success(function (data, status, headers, config) {
+    $scope.shoppingCartUser = [];
+    var itemsInCart = data.items;
+    $scope.totalCart = 0;
+
+    console.log("**** Data items[] : ");
+    console.log(itemsInCart.length);
+
+    for (var i = 0; i < itemsInCart.length; i++) {
+      $scope.shoppingCartUser.push(itemsInCart[i]);
+      var price = parseInt(itemsInCart[i].price);
+
+      $scope.totalCart += price;
+
+      console.log("total Cart : ");
+      console.log($scope.totalCart);
+    };  
+    console.log($scope.shoppingCartUser);
+
+  }).error(function (data, status, headers, config) {
+    $rootScope.notify("Oops something went wrong !! Please try again later");
   });
-/*end:beverages-controller*/
+
+  //Remove item from card
+  $scope.removeFromCart = function(item){
+    API.removeOneItemFromCart(userToken).success(function (data, status, headers, config) {
+      console.log("removing item");
+      console.log(userToken);
+      // console.log( item._id);
+    }).error(function (data, status, headers, config) {
+      $rootScope.notify("Oops something went wrong !! Please try again later");
+    });
+  }
+  
+
+});
+/*end:shopping-cart-controller*/

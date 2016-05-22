@@ -1,7 +1,8 @@
 var restify     =   require('restify');
 var mongojs     =   require('mongojs');
 var morgan    =   require('morgan');
-var db          =   mongojs('littlebreakfastapp', ['users','todoLists', 'meals', 'categories']);
+var dbUrl = "mongodb://admin:1234@ds011442.mlab.com:11442/heroku_vtcs6822";
+var db          =   mongojs(dbUrl, ['users','todoLists', 'meals', 'categories', 'shoppingcarts']);
 var server      =   restify.createServer();
  
 server.use(restify.acceptParser(server.acceptable));

@@ -1,45 +1,49 @@
 <ion-view view-title="Our Beverages">
   <ion-content style="background-color:#F3EFE8">
 
-   <!--  <div class="home-banner">
-      <h1 class="curvy-text slogan">When your bed is just to comfy to leave</h1>
-    </div> -->
-
+    <!-- Cat 1-->
     <div class="item item-divider">
         Hot Beverages
     </div>
-    <div class="list card" ng-repeat="beverage in listBeverages" href="#/app/beverages/{{beverage._id}}">
 
-      <div class="item item-body">
-        <img class="full-image" src="http://data1.whicdn.com/images/77977065/large.jpg">
-        <h2>{{beverage.title}}</h2>
-        <p>{{beverage.price}} €</p>
-        <div class="button-bar">
-          <a class="button button-calm button-rose">Add to basket</a>
-          <a class="button button-calm button-rose" href="#/app/beverages/{{beverage._id}}">Details</a>
+    <div class="list card" ng-repeat="beverage in listBeverages" href="#/app/meals/{{meal._id}}">
+      <div class="item item-body box-meal">
+        <div class="box-meal-img">
+          <img class="full-image meal-image" src="http://data1.whicdn.com/images/77977065/large.jpg">
+        </div>
+        <div class="box-meal-desc">
+          <h2>{{beverage.title}}</h2>
+          <p class="price">{{beverage.price}} €</p>     
+          <div class="button-bar">
+            <a class="button button-outline button-calm" href="#/app/meals/{{beverage._id}}"><i class="icon ion-information"></i></a>
+            <a class="button button-outline button-calm" ng-click="addToCart(beverage)"><i class="icon ion-android-cart"></i></a>
+          </div>
         </div>
       </div>
-
     </div>
+    <!-- end:cat1 -->
 
 
+    <!-- Cat 2-->
     <div class="item item-divider">
         Cold Beverages
     </div>
-    <div class="list card" ng-repeat="beverage in listBeverages" href="#/app/beverages/{{beverage._id}}">
-
-      <div class="item item-body">
-        <img class="full-image" src="http://www.menshealth.com/sites/menshealth.com/files/styles/slideshow-desktop/public/images/slideshow2/smoothie-intro.jpg?itok=SnODR8vz">
-        <h2>{{beverage.title}}</h2>
-        <div class="button-bar">
-          <a class="button button-calm button-rose">Add to basket</a>
-          <a class="button button-calm button-rose" href="#/app/beverages/{{beverage._id}}">Details</a>
-        </div>
-      </div>
-
-    </div>
-
-
+    <div class="list card" ng-repeat="beverage in listBeverages" href="#/app/meals/{{beverage._id}}">
+         <div class="item item-body box-meal">
+           <div class="box-meal-img">
+             <img class="full-image meal-image" src="http://www.menshealth.com/sites/menshealth.com/files/styles/slideshow-desktop/public/images/slideshow2/smoothie-intro.jpg?itok=SnODR8vz">
+           </div>
+           <div class="box-meal-desc">
+             <h2>{{beverage.title}}</h2>
+             <p class="price">{{beverage.price}} €</p>     
+             <div class="button-bar">
+               <a class="button button-outline button-calm" href="#/app/meals/{{beverage._id}}"><i class="icon ion-information"></i></a>
+               <a class="button button-outline button-calm" ng-click="addToCart(beverage)"><i class="icon ion-android-cart"></i></a>
+             </div>
+           </div>
+         </div>
+       </div>
+       <!-- end:cat2 -->
 
 
 
