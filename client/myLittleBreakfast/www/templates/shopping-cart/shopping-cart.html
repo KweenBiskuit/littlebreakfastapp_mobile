@@ -1,6 +1,6 @@
 <ion-view view-title="Your cart">
   <ion-content class="padding">
-    <h1 class="home-title">Shopping Cart</h1>
+    <h1 class="home-title">Shopping Cart </h1>
 
     <div id="box-empty-cart" ng-show="shoppingCartUser.length <= 0">
       <h4>Your shopping cart is empty ! </h4>
@@ -8,12 +8,21 @@
     </div>
 
     <div ng-show="shoppingCartUser.length > 0">
-    <h4>Total : {{ totalCart }} €</h4>
+    <h4> <ngcart-summary></ngcart-summary></h4>
+
+
+
+ <ngcart-cart></ngcart-cart>
+
+ <ngcart-checkout service="http" settings="{ url:'/checkout' }"></ngcart-checkout>
+
 
 <div class="list" ng-repeat="item in shoppingCartUser">
 
 
   <div class="item item-thumbnail-left item-button-right">
+  
+
     <img src="{{item.photo}}">
     <h2 style="text-align:left">{{item.title}}</h2>
     <p>{{item.price}} €</p>

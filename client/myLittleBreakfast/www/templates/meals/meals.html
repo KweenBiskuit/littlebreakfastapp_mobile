@@ -1,7 +1,10 @@
 <ion-view view-title="Our Meals">
-  <ion-content style="background-color:#F3EFE8">
+  <ion-content style="background-color:">
+
+    <ngcart-cart></ngcart-cart>
 
     <!-- {{listCategories}} -->
+
 
     <!-- LIST CATEGORIES REPEAT -->
     <div class="box-wrapper-category" ng-repeat="categorie in listCategories">
@@ -12,32 +15,34 @@
           <p>{{categorie.name}}</p>
         </div>
 
-        <div  ng-repeat="meal in listMeals" >
+        <div ng-repeat="meal in listMeals" >
           <div ng-if="meal.cat_id == categorie._id"   class="list card card-box-meal">
-            <a href="#/app/meals/{{meal._id}}">
-              <div class="item item-body box-meal">
-                <div class="box-meal-img">
+            <div class="item item-body box-meal">
+              <div class="box-meal-img">
+                <a href="#/app/meals/{{meal._id}}">
                   <img class="full-image meal-image" src="{{meal.photo}}">
-                </div>
-                <div class="box-meal-desc">
-                  <h2>{{meal.title}}</h2>
-                  <p>cat n° : {{meal.cat_id}}</p>
-                  <p class="price">{{meal.price}} €</p>     
-                  <div class="button-bar">
-                    <a class="button button-outline button-calm" href="#/app/meals/{{meal._id}}"><i class="icon ion-information"></i></a>
-                    <a class="button button-outline button-calm" ng-click="addToCart(meal)"><i class="icon ion-android-cart"></i></a>
-                  </div>
-                </div>
+                </a>
               </div>
-            </a>
-          </div></div>
+              <div class="box-meal-desc">
 
+                <h2>{{meal.title}}</h2>
+                <p>cat n° : {{meal.cat_id}}</p>
+                <p class="price">{{meal.price}} €</p>     
+
+                <ngcart-addtocart id="{{meal._id}}" name="{{meal.title}}" price="{{meal.price}}" quantity="1" quantity-max="5">
+                  Add to Cart
+                </ngcart-addtocart>
+              </div>
+            </div>
+          </div>
         </div>
-          <!-- end:BOX ONE CATEGORY -->
+
       </div>
-      <!-- end:BOX LIST CATEGORIES -->
+      <!-- end:BOX ONE CATEGORY -->
+    </div>
+    <!-- end:BOX LIST CATEGORIES -->
 
 
-    </ion-content>
-  </ion-view>
+  </ion-content>
+</ion-view>
 

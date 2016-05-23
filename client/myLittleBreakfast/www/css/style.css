@@ -143,7 +143,7 @@ p.price{
   text-align: right;
 }
 div.item.item-divider{
-  background-color: #E3D8DA;
+  background-color: #EBEADC;
   /*color:#fff;*/
 }
 
@@ -166,4 +166,8 @@ span.button-cart{
   background-color: red;
   width: 20px;
   height: 20px;
+}
+
+.info-cart{
+  font-style:italic;
 }
